@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="script" href="script.js">
+    <title>Personalized Recommendation System</title>
+    
+</head>
+<body>
+    <!-- <img src="snowy-mountain-peak-starry-galaxy-majesty-generative-ai.jpg" alt=""> -->
+    <div class="container">
+        <h1>Personalized Recommendations</h1>
+        <form id="userForm">
+            <label for="interests" id="cap">Enter your interests (First letter must should be captial)</label>
+            <input type="text" id="interests" placeholder="e.g., Music, Sports, Tech ,Books" required>
+            <button type="submit">Get Recommendations</button>
+        </form>
+        <div id="recommendations" class="recommendations"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Kablammo&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Kablammo&family=Rubik+Wet+Paint&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Kablammo&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&family=Rubik+Wet+Paint&display=swap');
+
+    body {
+    width: 100%;
+    height: 100%;
+    font-family: "Playwrite GB S", cursive;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    background-color:skyblue;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(1,1,1,1);
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin-top: 100px;
+    flex-direction: column;
+    justify-content: space-between;
+    justify-content: space-around;
+    background-color: beige;
+    border: double 7px blueviolet;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    border: 2.5px solid black;
+    padding: 10px;
+    border-radius: 5px;
+    color:rgb(136, 19, 136);
+    cursor:pointer;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    background-color: #5cb85c;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+.recommendations {
+    margin: 20px;
+}
+h1 {
+    font-family: "Rubik Wet Paint", system-ui;
+   /* font-family: "Kablammo", system-ui;
+    font-weight: bolder;*/
+    background-color: rgb(192, 253, 253);
+    color: rgb(63, 63, 63);
+}
+button:hover{
+    background-color: purple;
+    color: white;
+}
+button:active{
+    background-color: aqua;
+    outline: 2px solid black;
+    color: black;
+}
+</style>
+
+
+
+
+
+<script>
+    document.getElementById('userForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const interests = document.getElementById('interests').value.split(',').map(item => item.trim());
+    const recommendations = generateRecommendations(interests);
+    
+    displayRecommendations(recommendations);
+});
+
+function generateRecommendations(interests) {
+    // Example static recommendations based on interests
+    const allRecommendations = {
+        Music: ['Rock Concert', 'Jazz Night', 'Music Festival'],
+        Sports: ['Football Match', 'Basketball Game', 'Marathon','Cricket','Hockey','Golf'],
+        Tech: ['Tech Conference', 'Coding Workshop', 'Gadget Expo'],
+        Books: ['Wings of fire','Game of thrones','Harry potter','How to talk anyone','Rich dad Poor dad','']
+       // Anime:  ['One piece','Naruto','Dragon ball','Bleach','Demon slayer','Tokyo revengers','Black clover','Haikyu','Attack on titan','Blue lock','Breserk']
+    };
+
+    const result = [];
+    interests.forEach(interest => {
+        if (allRecommendations[interest]) {
+            result.push(...allRecommendations[interest]);
+        }
+    });
+
+    return result.length > 0 ? result : ['No recommendations found for your interests.'];
+}
+
+function displayRecommendations(recommendations) {
+    const recommendationsDiv = document.getElementById('recommendations');
+    recommendationsDiv.innerHTML = '<h2>Recommendations:</h2>' + 
+                                    '<ul>' + 
+                                    recommendations.map(rec => `<li>${rec}</li>`).join('') + 
+                                    '</ul>';
+}
+
+</script>
